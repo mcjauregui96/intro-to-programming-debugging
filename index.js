@@ -44,9 +44,10 @@ function checkGuess() {
  // if (guess !== targetNumber) {
    else if (guess < targetNumber) {
     tooLowMessage.style.display = '';
-  } else {
+  } else if (guess > targetNumber) {
       tooHighMessage.style.display = '';
-    }
+    } else{};
+    
 
     const remainingAttempts = maxNumberOfAttempts - attempts;
 
@@ -91,7 +92,6 @@ function setup(){
 
   hideAllMessages();
   resetButton.style.display = 'none';
-  guessInput.value = '';
 }
 
 submitButton.addEventListener('click', checkGuess);
