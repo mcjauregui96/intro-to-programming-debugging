@@ -39,11 +39,12 @@ function checkGuess() {
     submitButton.disabled = true;
     guessInput.disabled = true;
   }
+// line 44 deleted
 // Changed too low for too high
-  if (guess !== targetNumber) {
-    if (guess < targetNumber) {
-      tooLowMessage.style.display = '';
-    } else {
+ // if (guess !== targetNumber) {
+   else if (guess < targetNumber) {
+    tooLowMessage.style.display = '';
+  } else {
       tooHighMessage.style.display = '';
     }
 
@@ -53,19 +54,20 @@ function checkGuess() {
    if(remainingAttempts ===1){numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guess remaining`;
   } else{
     numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
-    maxGuessesMessage.style.display = '';
+   
   }
 // Deleted an extra =
   if (attempts === maxNumberOfAttempts) {
     submitButton.disabled = true;
     guessInput.disabled = true;
+    maxGuessesMessage.style.display = '';
   }
 
   guessInput.value = '';
 
   resetButton.style.display = '';
 }
-}
+
 // Added a -1 to messages.length
 function hideAllMessages() {
   for (let elementIndex = 0; elementIndex <= messages.length-1; elementIndex++) {
@@ -79,8 +81,8 @@ function setup(){
   console.log(`target number: ${targetNumber}`);
 
   // Reset number of attempts
-  //changed from 0 to 5
-  maxNumberOfAttempts = 5;
+  //changed the name from MaxNumberOfAttempts to attempts
+  attempts = 0;
 
   // Enable the input and submit button
   // Spell error in disabled
@@ -89,6 +91,7 @@ function setup(){
 
   hideAllMessages();
   resetButton.style.display = 'none';
+  guessInput.value = '';
 }
 
 submitButton.addEventListener('click', checkGuess);
