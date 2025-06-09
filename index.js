@@ -10,7 +10,8 @@ const correctMessage = document.getElementById('correct');
 
 let targetNumber;
 let attempts = 0;
-const maxNumberOfAttempts = 5;
+// Changed const to let
+let maxNumberOfAttempts = 5;
 
 // Returns a random number from min (inclusive) to max (exclusive)
 // Usage:
@@ -38,23 +39,29 @@ function checkGuess() {
     submitButton.disabled = true;
     guessInput.disabled = true;
   }
-
-  if (guess !== targetNumber) {
-    if (guess < targetNumber) {
-      tooLowMessage.style.display = '';
-    } else {
-      tooLowMessage.style.display = '';
-    }
+// line 44 deleted
+// Changed too low for too high
+ // if (guess !== targetNumber) {
+   else if (guess < targetNumber) {
+    tooLowMessage.style.display = '';
+  } else if (guess > targetNumber) {
+      tooHighMessage.style.display = '';
+    } else{};
+    
 
     const remainingAttempts = maxNumberOfAttempts - attempts;
 
     numberOfGuessesMessage.style.display = '';
+   if(remainingAttempts ===1){numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guess remaining`;
+  } else{
     numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
+   
   }
-
-  if (attempts ==== maxNumberOfAttempts) {
+// Deleted an extra =
+  if (attempts === maxNumberOfAttempts) {
     submitButton.disabled = true;
     guessInput.disabled = true;
+    maxGuessesMessage.style.display = '';
   }
 
   guessInput.value = '';
@@ -62,22 +69,25 @@ function checkGuess() {
   resetButton.style.display = '';
 }
 
+// Added a -1 to messages.length
 function hideAllMessages() {
-  for (let elementIndex = 0; elementIndex <= messages.length; elementIndex++) {
+  for (let elementIndex = 0; elementIndex <= messages.length-1; elementIndex++) {
     messages[elementIndex].style.display = 'none';
   }
 }
-
-funtion setup() {
+//Spell error in function
+function setup(){
   // Get random number
   targetNumber = getRandomNumber(1, 100);
   console.log(`target number: ${targetNumber}`);
 
   // Reset number of attempts
-  maxNumberOfAttempts = 0;
+  //changed the name from MaxNumberOfAttempts to attempts
+  attempts = 0;
 
   // Enable the input and submit button
-  submitButton.disabeld = false;
+  // Spell error in disabled
+  submitButton.disabled = false;
   guessInput.disabled = false;
 
   hideAllMessages();
