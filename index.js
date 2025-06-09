@@ -10,7 +10,8 @@ const correctMessage = document.getElementById('correct');
 
 let targetNumber;
 let attempts = 0;
-const maxNumberOfAttempts = 5;
+// Changed const to let
+let maxNumberOfAttempts = 5;
 
 // Returns a random number from min (inclusive) to max (exclusive)
 // Usage:
@@ -38,21 +39,24 @@ function checkGuess() {
     submitButton.disabled = true;
     guessInput.disabled = true;
   }
-
+// Changed too low for too high
   if (guess !== targetNumber) {
     if (guess < targetNumber) {
       tooLowMessage.style.display = '';
     } else {
-      tooLowMessage.style.display = '';
+      tooHighMessage.style.display = '';
     }
 
     const remainingAttempts = maxNumberOfAttempts - attempts;
 
     numberOfGuessesMessage.style.display = '';
+   if(remainingAttempts ===1){numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guess remaining`;
+  } else{
     numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
+    maxGuessesMessage.style.display = '';
   }
-
-  if (attempts ==== maxNumberOfAttempts) {
+// Deleted an extra =
+  if (attempts === maxNumberOfAttempts) {
     submitButton.disabled = true;
     guessInput.disabled = true;
   }
@@ -61,23 +65,26 @@ function checkGuess() {
 
   resetButton.style.display = '';
 }
-
+}
+// Added a -1 to messages.length
 function hideAllMessages() {
-  for (let elementIndex = 0; elementIndex <= messages.length; elementIndex++) {
+  for (let elementIndex = 0; elementIndex <= messages.length-1; elementIndex++) {
     messages[elementIndex].style.display = 'none';
   }
 }
-
-funtion setup() {
+//Spell error in function
+function setup(){
   // Get random number
   targetNumber = getRandomNumber(1, 100);
   console.log(`target number: ${targetNumber}`);
 
   // Reset number of attempts
-  maxNumberOfAttempts = 0;
+  //changed from 0 to 5
+  maxNumberOfAttempts = 5;
 
   // Enable the input and submit button
-  submitButton.disabeld = false;
+  // Spell error in disabled
+  submitButton.disabled = false;
   guessInput.disabled = false;
 
   hideAllMessages();
